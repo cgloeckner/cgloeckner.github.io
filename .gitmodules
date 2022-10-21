@@ -1,0 +1,3 @@
+[submodule "html-audio-mixer"]
+	path = html-audio-mixer
+	url = https://github.com/cgloeckner/html-audio-mixer
