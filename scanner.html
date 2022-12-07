@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Scanner</title>
+	<script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"></script>
+	<script src="https://unpkg.com/html5-qrcode"></script>
+</header>
+<body>
+
+<select id="students">
+</select>
+
+<div id="qr-reader" style="width: 600px"></div>
+
+<button onClick="onShow()">Anzeigen</button>
+<pre id="output"></pre>
+
+<script>
+var data = []
+
+function addStudent(name, vorname) {
+	data.push({'name': name, 'vorname': vorname, 'buecher': []})
+	let o = document.createElement('option')
+	o.value = data.length - 1
+	o.innerHTML = `${name}, ${vorname}`
+	$('#students')[0].appendChild(o)
+}
+
+function getSelectedStudentId() {
+	return $('#students option:selected')[0].value
+}
+
+function onShow() {
+	$('#output')[0].innerHTML = JSON.stringify(data, null, 4)
+}
+
+function onScanSuccess(decodedText, decodedResult) {
+	let s = data[getSelectedStudentId()]
+	s['buecher'].push(JSON.parse(decodedText))
+	console.log(s)
+}
+
+addStudent('Beispiel', 'Max')
+addStudent('Maduschen', 'Isolde')
+addStudent('Zoff', 'Stan Dic')
+
+let scanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: 250 });
+scanner.render(onScanSuccess);
+
+</script>
+</body>
+</html>
