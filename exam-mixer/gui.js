@@ -150,8 +150,12 @@ function save_mixes() {
 
 /// Load all mix configurations from localStorage
 function load_mixes() {
-    all_mixes = localStorage.getItem('all_mixes')
-    return JSON.parse(all_mixes)
+    const all_mixes = localStorage.getItem('all_mixes')
+    const data = JSON.parse(all_mixes)
+    if (data === null) {
+        return {}
+    }
+    return data
 }
 
 /// Update the Mixes in GUI
