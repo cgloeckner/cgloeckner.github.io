@@ -233,7 +233,9 @@ function save_preamble() {
 /// Show preamble in GUI
 function show_preamble() {
     const content = localStorage.getItem('preamble')
-    $('#preamble').val(content)
+    if (content !== null) {
+        $('#preamble').val(content)
+    }
 }
 
 /// Compile the mix to a single tex file
