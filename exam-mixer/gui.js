@@ -245,6 +245,12 @@ function show_preamble() {
 
 /// Compile the mix to a single tex file
 function compile() {
+    const data = get_mix_selections()
+    if (data.length == 0) {
+        alert('Es wurde noch nichts kombiniert.')
+        return;
+    }
+
     const all_files = list_all_files()
     const prepared = prepare_all_texts(all_files)
 
@@ -252,7 +258,6 @@ function compile() {
     doc = preamble + "\n\\begin{document}\n"
     let task_number = 1
 
-    const data = get_mix_selections()
     for (const mix of data) {
         // load TeX from storage
         const p = prepared['presentation'][mix[0]]
