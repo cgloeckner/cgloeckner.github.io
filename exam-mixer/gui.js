@@ -104,6 +104,11 @@ function add_row(value1 = null, value2 = null) {
     const all_files = list_all_files()
     row = $('<tr>')
 
+    if (all_files.length == 0) {
+        alert('Noch keine Aufgabenteile verfügbar')
+        return
+    }
+
     select1 = create_select(all_files['presentation'], value1)
     select1.on('change', function() {save_mixes()})
     presentation_cell = $('<td>').append(select1)
@@ -153,7 +158,7 @@ function load_mixes() {
     const all_mixes = localStorage.getItem('all_mixes')
     const data = JSON.parse(all_mixes)
     if (data === null) {
-        return {}
+        return []
     }
     return data
 }
