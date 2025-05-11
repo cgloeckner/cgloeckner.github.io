@@ -1,0 +1,70 @@
+<html>
+<head>
+    <title>Exam-Mixer</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script> 
+    <script src="/gui.js" defer></script>
+    <style>
+body {
+    text-align: center;
+}
+
+table#mixes {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table#mixes tr:nth-child(1),
+table#mixes tr:nth-child(2) {
+    width: 200px;
+}
+
+table#mixes select {
+    width: 200px;
+}
+
+textarea {
+    width: 500px;
+    height: 250px;
+}
+    </style>
+</head>
+<body>
+
+
+
+<h1>Prüfungsaufgaben kombinieren</h1>
+
+<h2>Bisherige Aufgabenteile</h2>
+
+<b>Prüfungsvorträge:</b>
+<div id="all_presentation">keine</div>
+<b>Prüfungsgespräche:</b>
+<div id="all_interview">keine</div>
+
+
+<h2>Neue Aufgabenteile</h2>
+
+<input type="file" id="file_input" accept=".tex" multiple>
+<ul id="selected"></ul>
+
+Als <select id="prefix">
+    <option value="presentation:">Prüfungsvorträg</option>
+    <option value="interview:">Prüfungsgespräche</option>
+</select>
+<button onClick="upload()">speichern</button>
+
+
+
+<h2>Kombinieren</h2>
+<table id="mixes">
+    <tr></tr>
+</table>
+<button onClick="add_row()">Aufgabe hinzufügen</button>
+<button onClick="compile()">Konfiguration erzeugen</button>
+
+<p>LaTeX preamble:</p>
+<input type="file" id="preamble_input" accept=".tex" onChange="upload_preamble()"><br />
+<textarea id="preamble" onInput="save_preamble()"></textarea>
+
+</body>
+</html>
